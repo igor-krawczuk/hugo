@@ -51,7 +51,7 @@ Hugo passes reasonable default arguments to these external helpers by default:
 
 - `asciidoctor`: `--no-header-footer -`
 - `rst2html`: `--leave-comments --initial-header-level=2`
-- `pandoc`: `--mathjax`
+- `pandoc`: `--mathml` (note: this is our patch)
 
 {{% warning "Performance of External Helpers" %}}
 Because additional formats are external commands, generation performance will rely heavily on the performance of the external tool you are using. As this feature is still in its infancy, feedback is welcome.

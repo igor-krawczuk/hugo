@@ -15,6 +15,7 @@
 package pandoc
 
 import (
+	"os"
 	"github.com/cli/safeexec"
 	"github.com/gohugoio/hugo/htesting"
 	"github.com/gohugoio/hugo/identity"
@@ -60,7 +61,13 @@ func (c *pandocConverter) getPandocContent(src []byte, ctx converter.DocumentCon
 			"                 Leaving pandoc content unrendered.")
 		return src
 	}
-	args := []string{"--mathjax"}
+  bib_path:=os.Getenv("WEBSITE_BIBLIOGRAPHY")
+  args:=[]string{};
+  if len(bib_path)==0{
+  args= []string{"--mathml","--citeproc"} // note: this is our patch
+  }else{
+    args= []string{"--mathml","--citeproc","--bibliography",bib_path} // note: this is our patch
+  }
 	return internal.ExternallyRenderContent(c.cfg, ctx, src, path, args)
 }
 
