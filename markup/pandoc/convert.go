@@ -66,7 +66,8 @@ func (c *pandocConverter) getPandocContent(src []byte, ctx converter.DocumentCon
   if len(bib_path)==0{
   args= []string{"--mathml","--citeproc"} // note: this is our patch
   }else{
-    args= []string{"--mathml","--citeproc","--bibliography",bib_path} // note: this is our patch
+    args= []string{"--mathml","--citeproc","--bibliography",bib_path,"--metadata","link-citations=true"} // note: this is our patch, see https://github.com/jgm/pandoc-citeproc/issues/198 for the link-citations bit
+
   }
 	return internal.ExternallyRenderContent(c.cfg, ctx, src, path, args)
 }
